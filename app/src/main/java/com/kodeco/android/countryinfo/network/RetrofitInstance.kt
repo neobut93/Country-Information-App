@@ -5,7 +5,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 object RetrofitInstance {
 
-    private val BASE_URL = "https://restcountries.com/v3.1/"
+    val BASE_URL = "https://restcountries.com/v3.1/"
 
     val api: CountriesApi by lazy {
         Retrofit.Builder()
