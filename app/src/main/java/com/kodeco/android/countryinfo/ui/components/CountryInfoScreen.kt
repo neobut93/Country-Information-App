@@ -18,12 +18,12 @@ import com.kodeco.android.countryinfo.network.Country
 // TODO fill out CountryInfoScreen
 @Composable
 fun CountryInfoScreen(
-    country: List<Country>,
+    countries: ArrayList<String>,
     modifier: Modifier = Modifier
 ) {
-    LazyColumn(modifier) {
-        items(country.size) { con ->
-
+    LazyColumn {
+        items(countries.size) {
+            CountryInfoRow(countryName = countries[it], capitalName = countries[it])
         }
     }
 }
@@ -31,4 +31,5 @@ fun CountryInfoScreen(
 // TODO fill out the preview.
 @Preview
 @Composable
-fun CountryInfoScreenPreview() { }
+fun CountryInfoScreenPreview() {
+}
