@@ -1,5 +1,6 @@
 package com.kodeco.android.countryinfo.network
 
+import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -8,10 +9,9 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 object RetrofitInstance {
 
-    val countries =  arrayListOf<String>()
-    val capitals = arrayListOf<String>()
+    val countriesAndCapitals: MutableMap<String, String> = mutableMapOf()
 
-    val BASE_URL = "https://restcountries.com/v3.1/"
+    const val BASE_URL = "https://restcountries.com/v3.1/"
 
     val api: CountriesApi by lazy {
         Retrofit.Builder()
@@ -22,14 +22,7 @@ object RetrofitInstance {
     }
 
     fun getCountriesData() {
-        val retrofitBuilder = Retrofit.Builder()
-            .addConverterFactory(MoshiConverterFactory.create())
-            .baseUrl(RetrofitInstance.BASE_URL)
-            .build()
-            .create(CountriesApi::class.java)
-
-        val retrofitData = retrofitBuilder.fetchCountries()
-
+        val retrofitData = api.fetchCountries()
         retrofitData.enqueue(object : Callback<List<Country>?> {
             override fun onResponse(
                 call: Call<List<Country>?>,
@@ -38,15 +31,12 @@ object RetrofitInstance {
                 val responseBody = response.body()
                 if (responseBody != null) {
                     for(element in responseBody) {
-                        //element.capital?.get(0)?.let { dual.put(element.name.common, it) }
-                        countries.add(element.commonName)
-                        capitals.add(element.capital?.get(0) ?: "capital is not defined")
+                        countriesAndCapitals[element.commonName] = element.capital?.get(0) ?: "Capital is not defined"
                     }
                 }
             }
-
             override fun onFailure(call: Call<List<Country>?>, t: Throwable) {
-
+                Log.e("Error", "List of counties is not present!")
             }
         })
     }
