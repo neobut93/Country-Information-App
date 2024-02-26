@@ -11,6 +11,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         RetrofitInstance.getCountriesData()
+        // note: UI takes several minutes to load, I think it's because of the way I am supplying LazyColumn by data
         setContent {
             MyApplicationTheme {
                 CountryInfoScreen(RetrofitInstance.countriesAndCapitals)
