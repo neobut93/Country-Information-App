@@ -36,7 +36,7 @@ object RetrofitInstance {
                 }
             }
             override fun onFailure(call: Call<List<Country>?>, t: Throwable) {
-                Log.e("Error", "List of counties is not present!")
+                Log.e("Error", "List of ounties are not present")
             }
         })
     }
