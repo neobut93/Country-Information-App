@@ -16,13 +16,13 @@ import androidx.compose.ui.Modifier
 import com.kodeco.android.countryinfo.network.CountriesApi
 import com.kodeco.android.countryinfo.network.Country
 import com.kodeco.android.countryinfo.network.RetrofitInstance
+import com.kodeco.android.countryinfo.ui.components.CountryErrorScreen
 import com.kodeco.android.countryinfo.ui.components.CountryInfoScreen
 import com.kodeco.android.countryinfo.ui.theme.MyApplicationTheme
 import kotlinx.coroutines.delay
 import kotlinx.parcelize.Parcelize
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.create
 
 class MainActivity : ComponentActivity() {
 
@@ -36,7 +36,6 @@ class MainActivity : ComponentActivity() {
     private val service: CountriesApi = retrofit.create(CountriesApi::class.java)
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -46,14 +45,29 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    val stateStr = when(val countryUIState = uiState) {
-                        is CountryUIState.Loaded -> "Loaded with ${countryUIState.countries.size} countries"
-                        CountryUIState.Loading -> "Loading..."
-                        is CountryUIState.Error -> "Error occured: ${countryUIState.exception}"
+//                    val stateStr = when (val countryUIState = uiState) {
+//                        is CountryUIState.Loaded -> "Loaded with ${countryUIState.countries.size} countries"
+//                        CountryUIState.Loading -> "Loading..."
+//                        is CountryUIState.Error -> "Error occured: ${countryUIState.exception}"
+//                    }
+
+                    //todo modify method and add error scenarios + loading spinner
+                    fun countryNames(): MutableMap<String, String> {
+                        val countriesAndCapitals: MutableMap<String, String> = mutableMapOf()
+                        return when (val countryUIState = uiState) {
+                            is CountryUIState.Loaded -> {
+                                for(element in 0..< countryUIState.countries.size) {
+                                    countriesAndCapitals.put(countryUIState.countries[element].commonName, countryUIState.countries[element].capital.toString().replace("[","").replace("]",""))
+                                }
+                                countriesAndCapitals
+                            }
+                            CountryUIState.Loading -> mutableMapOf()
+
+                            is CountryUIState.Error -> mutableMapOf()
+                        }
                     }
 
-                    Text(text = stateStr)
-
+                    CountryInfoScreen(countryNames())
                     LaunchedEffect(Unit) {
                         delay(5000)
                         uiState = try {
@@ -69,11 +83,11 @@ class MainActivity : ComponentActivity() {
 }
 
 @Parcelize
-sealed class CountryUIState: Parcelable {
+sealed class CountryUIState : Parcelable {
 
-    data class Loaded(val countries: List<Country>): CountryUIState()
+    data class Loaded(val countries: List<Country>) : CountryUIState()
 
-    object Loading: CountryUIState()
+    object Loading : CountryUIState()
 
-    data class Error(val exception: Throwable): CountryUIState()
+    data class Error(val exception: Throwable) : CountryUIState()
 }
