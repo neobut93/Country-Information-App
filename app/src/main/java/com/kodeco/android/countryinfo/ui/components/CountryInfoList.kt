@@ -1,28 +1,35 @@
 package com.kodeco.android.countryinfo.ui.components
 
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
-// TODO fill out CountryInfoList
 @Composable
 fun CountryInfoList(
-    text: String,
-    modifier: Modifier = Modifier
+    countries: MutableMap<String, String>
 ) {
-    Text(text = text,
-        fontSize = 14.sp,
-        modifier = modifier
-            .fillMaxSize()
-            .padding(16.dp))
+    LazyColumn {
+        items(countries.size) {
+            for ((key, value) in countries) {
+                CountryInfoRow(countryName = key, capitalName = value)
+            }
+        }
+    }
 }
 
-// TODO fill out the preview.
 @Preview
 @Composable
-fun CountryInfoListPreview() { }
+fun CountryInfoListPreview() {
+    val mockData = mutableMapOf<String, String>()
+    mockData.put("UK", "London")
+    mockData.put("USA", "Washington DC")
+    mockData.put("Spain", "Madrid")
+    mockData.put("France", "Paris")
+    LazyColumn {
+        items(mockData.size) {
+            for ((key, value) in mockData) {
+                CountryInfoRow(countryName = key, capitalName = value)
+            }
+        }
+    }
+}
