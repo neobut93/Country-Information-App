@@ -45,28 +45,18 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    fun getCountryMap() : MutableMap<String, String> {
+                    @Composable
+                    fun displayState() {
                         val countriesAndCapitals: MutableMap<String, String> = mutableMapOf()
-                        return when (val countryUIState = uiState) {
+                        when(val countryUIState = uiState) {
                             is CountryUIState.Loaded -> {
                                 for (element in 0..<countryUIState.countries.size) {
                                     countriesAndCapitals[countryUIState.countries[element].commonName] =
                                         countryUIState.countries[element].capital.toString()
                                             .replace("[", "").replace("]", "")
                                 }
-                                countriesAndCapitals
+                                CountryInfoScreen(countriesAndCapitals)
                             }
-
-                            else -> {mutableMapOf()}
-                        }
-
-                    }
-
-
-                    @Composable
-                    fun displayState() {
-                        when(val countryUIState = uiState) {
-                            is CountryUIState.Loaded -> CountryInfoScreen(getCountryMap())
                             CountryUIState.Loading -> Loading()
                             is CountryUIState.Error -> CountryErrorScreen()
                         }
