@@ -3,6 +3,7 @@ package com.kodeco.android.countryinfo.network
 import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -36,5 +37,8 @@ data class Country(
     val commonName: String = name.common,
     @field:Json(name = "flagsPng")
     val flagsPng: String = flags.png
-) : Parcelable
+) : Parcelable {
+    @IgnoredOnParcel
+    val firstCapital = capital?.first() ?: "no capital defined"
+}
 

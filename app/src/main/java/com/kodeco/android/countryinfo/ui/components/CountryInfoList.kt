@@ -3,15 +3,16 @@ package com.kodeco.android.countryinfo.ui.components
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.kodeco.android.countryinfo.network.Country
 
 @Composable
 fun CountryInfoList(
-    countries: MutableMap<String, String>
+    countries: List<Country>
 ) {
     LazyColumn {
         items(countries.size) {
-            for ((key, value) in countries) {
-                CountryInfoRow(countryName = key, capitalName = value)
+            countries.forEach { country ->
+                CountryInfoRow(country)
             }
         }
     }
@@ -25,11 +26,11 @@ fun CountryInfoListPreview() {
     mockData.put("USA", "Washington DC")
     mockData.put("Spain", "Madrid")
     mockData.put("France", "Paris")
-    LazyColumn {
-        items(mockData.size) {
-            for ((key, value) in mockData) {
-                CountryInfoRow(countryName = key, capitalName = value)
-            }
-        }
-    }
+//    LazyColumn {
+//        items(mockData.size) {
+//            for ((key, value) in mockData) {
+//                CountryInfoRow(countryName = key, capitalName = value)
+//            }
+//        }
+//    }
 }
