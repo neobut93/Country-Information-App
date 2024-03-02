@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     CountryInfoScreen(uiState)
                     LaunchedEffect(Unit) {
-                        delay(2000)
+                        delay(5000)
                         uiState = try {
                             CountryUIState.Loaded(RetrofitClient.service.fetchCountries())
                         } catch (exception: Exception) {
