@@ -20,4 +20,6 @@ fun CountryInfoScreen(
 @Preview
 @Composable
 fun CountryInfoScreenPreview() {
+    var uiState = CountryUIState.Loading
+    CountryInfoScreen(uiState)
 }

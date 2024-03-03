@@ -13,9 +13,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.kodeco.android.countryinfo.R
 import com.kodeco.android.countryinfo.network.Country
+import com.kodeco.android.countryinfo.network.CountryFlags
+import com.kodeco.android.countryinfo.network.CountryName
+import com.kodeco.android.countryinfo.ui.theme.MyApplicationTheme
 
 @Composable
 fun CountryInfoRow(country: Country) {
@@ -41,7 +46,7 @@ fun CountryInfoRow(country: Country) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Name: $countryName",
+                text = stringResource(R.string.country_name, countryName),
                 Modifier.padding(
                     top = 5.dp
                 )
@@ -53,7 +58,7 @@ fun CountryInfoRow(country: Country) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Capital: $capitalCapital",
+                text = stringResource(R.string.capital_name, capitalCapital),
                 Modifier.padding(
                     bottom = 5.dp
                 )
@@ -65,5 +70,20 @@ fun CountryInfoRow(country: Country) {
 @Preview(showBackground = true)
 @Composable
 fun CountryInfoRowPreview() {
-    //MyApplicationTheme { CountryInfoRow() }
+    val countryName = CountryName(
+        "France"
+    )
+    val countryFlags = CountryFlags(
+        "flag"
+    )
+    val country = Country(
+        countryName,
+        listOf("Paris"),
+        123L,
+        123.12,
+        countryFlags,
+        countryName.common,
+        "png"
+    )
+    MyApplicationTheme { CountryInfoRow(country) }
 }
