@@ -37,8 +37,6 @@ data class Country(
     val commonName: String = name.common,
     @field:Json(name = "flagsPng")
     val flagsPng: String = flags.png,
-    @field:Json(name = "altSpellings")
-    val altSpellings: List<String>?
 ) : Parcelable {
     @IgnoredOnParcel
     val firstCapital = capital?.first() ?: "no capital defined"

@@ -6,10 +6,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.kodeco.android.countryinfo.network.CountriesUIState
+import com.kodeco.android.countryinfo.network.CountryUIState
 
 @Composable
-fun MainScreen(uiState: CountriesUIState) {
+fun MainScreen(uiState: CountryUIState) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "countryInfoScreen") {
         composable("countryInfoScreen") {

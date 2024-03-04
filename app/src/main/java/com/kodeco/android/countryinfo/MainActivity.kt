@@ -11,7 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.kodeco.android.countryinfo.network.CountriesUIState
+import com.kodeco.android.countryinfo.network.CountryUIState
 import com.kodeco.android.countryinfo.network.RetrofitClient
 import com.kodeco.android.countryinfo.ui.components.MainScreen
 import com.kodeco.android.countryinfo.ui.theme.MyApplicationTheme
@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyApplicationTheme {
-                var uiState: CountriesUIState by rememberSaveable { mutableStateOf(CountriesUIState.Loading) }
+                var uiState: CountryUIState by rememberSaveable { mutableStateOf(CountryUIState.Loading) }
                 Surface(
                     modifier = Modifier.fillMaxSize()
                 ) {
@@ -30,9 +30,9 @@ class MainActivity : ComponentActivity() {
                     LaunchedEffect(Unit) {
                         delay(3000)
                         uiState = try {
-                            CountriesUIState.Loaded(RetrofitClient.service.fetchCountries())
+                            CountryUIState.Loaded(RetrofitClient.service.fetchCountries())
                         } catch (exception: Exception) {
-                            CountriesUIState.Error(exception)
+                            CountryUIState.Error(exception)
                         }
                     }
                 }

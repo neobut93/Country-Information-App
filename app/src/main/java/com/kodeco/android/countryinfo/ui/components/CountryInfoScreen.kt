@@ -3,29 +3,30 @@ package com.kodeco.android.countryinfo.ui.components
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import com.kodeco.android.countryinfo.network.CountriesUIState
+import androidx.navigation.compose.rememberNavController
+import com.kodeco.android.countryinfo.network.CountryUIState
 
 @Composable
 fun CountryInfoScreen(
-    uiState: CountriesUIState,
+    uiState: CountryUIState,
     navController: NavController
 ) {
     when (uiState) {
-        is CountriesUIState.Loaded -> {
+        is CountryUIState.Loaded -> {
             CountryInfoList(
                 uiState.countries,
                 navController
             )
         }
 
-        CountriesUIState.Loading -> Loading()
-        is CountriesUIState.Error -> CountryErrorScreen()
+        CountryUIState.Loading -> Loading()
+        is CountryUIState.Error -> CountryErrorScreen()
     }
 }
 
 @Preview
 @Composable
 fun CountryInfoScreenPreview() {
-//    var uiState = CountriesUIState.Loading
-//    CountryInfoScreen(uiState)
+    var uiState = CountryUIState.Loading
+    CountryInfoScreen(uiState, rememberNavController())
 }

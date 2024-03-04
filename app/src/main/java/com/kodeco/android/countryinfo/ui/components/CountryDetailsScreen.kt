@@ -95,4 +95,12 @@ fun CountryDetailsScreen(
 @Preview
 @Composable
 fun CountryDetailsScreenPreview() {
+    CountryDetailsScreen(
+        "France",
+        "Paris",
+        11111L,
+        123,
+        "https://flagcdn.com/w320/fr.png",
+        {}
+    )
 }

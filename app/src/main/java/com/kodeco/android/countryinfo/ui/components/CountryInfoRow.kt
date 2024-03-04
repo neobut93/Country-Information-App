@@ -18,10 +18,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.kodeco.android.countryinfo.R
 import com.kodeco.android.countryinfo.network.Country
 import com.kodeco.android.countryinfo.network.CountryFlags
 import com.kodeco.android.countryinfo.network.CountryName
+import com.kodeco.android.countryinfo.ui.theme.MyApplicationTheme
 
 @Composable
 fun CountryInfoRow(
@@ -46,7 +48,6 @@ fun CountryInfoRow(
             .clip(shape = RoundedCornerShape(15.dp))
             .background(Color(0xFFE8EAF6))
             .clickable {
-                //onItemClick(country)
                 navController.navigate("countryDetailsScreen?country=$countryName&capital=$capital&population=$population&area=$area&flag=$flag")
             }
     ) {
@@ -86,14 +87,14 @@ fun CountryInfoRowPreview() {
     val countryFlags = CountryFlags(
         "flag"
     )
-//    val country = Country(
-//        countryName,
-//        listOf("Paris"),
-//        123L,
-//        123.12,
-//        countryFlags,
-//        countryName.common,
-//        "png"
-//    )
-    //MyApplicationTheme { CountryInfoRow(country, ) }
+    val country = Country(
+        countryName,
+        listOf("Paris"),
+        123L,
+        123.12,
+        countryFlags,
+        countryName.common,
+        "png"
+    )
+    MyApplicationTheme { CountryInfoRow(country, rememberNavController()) }
 }
