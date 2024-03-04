@@ -1,15 +1,15 @@
 package com.kodeco.android.countryinfo.ui.components
 
+import android.util.Log
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 
-// TODO fill in the CountryDetailsScreen. NOTE this is above-and-beyond the required
-//  section of the homework assignment.
 @Composable
-fun CountryDetailsScreen() { }
+fun CountryDetailsScreen() {
+    Text(text = "ABCDR")
+}
 
-// TODO fill out the preview. NOTE this is above-and-beyond the required
-////  section of the homework assignment.
 @Preview
 @Composable
 fun CountryDetailsScreenPreview() { }

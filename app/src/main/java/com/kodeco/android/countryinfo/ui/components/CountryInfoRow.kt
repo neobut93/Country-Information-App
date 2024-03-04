@@ -1,6 +1,7 @@
 package com.kodeco.android.countryinfo.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,6 +17,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.kodeco.android.countryinfo.R
 import com.kodeco.android.countryinfo.network.Country
 import com.kodeco.android.countryinfo.network.CountryFlags
@@ -23,7 +26,11 @@ import com.kodeco.android.countryinfo.network.CountryName
 import com.kodeco.android.countryinfo.ui.theme.MyApplicationTheme
 
 @Composable
-fun CountryInfoRow(country: Country) {
+fun CountryInfoRow(
+    country: Country,
+    //onItemClick: (Country) -> Unit,
+    onNavigateToDetails: () -> Unit
+) {
     val countryName = country.commonName
     val capitalCapital = country.firstCapital
     Column(
@@ -38,7 +45,10 @@ fun CountryInfoRow(country: Country) {
             .fillMaxWidth()
             .clip(shape = RoundedCornerShape(15.dp))
             .background(Color(0xFFE8EAF6))
-
+            .clickable {
+                //onItemClick(country)
+                onNavigateToDetails()
+            }
     ) {
         Row(
             modifier = Modifier
@@ -76,14 +86,14 @@ fun CountryInfoRowPreview() {
     val countryFlags = CountryFlags(
         "flag"
     )
-    val country = Country(
-        countryName,
-        listOf("Paris"),
-        123L,
-        123.12,
-        countryFlags,
-        countryName.common,
-        "png"
-    )
-    MyApplicationTheme { CountryInfoRow(country) }
+//    val country = Country(
+//        countryName,
+//        listOf("Paris"),
+//        123L,
+//        123.12,
+//        countryFlags,
+//        countryName.common,
+//        "png"
+//    )
+    //MyApplicationTheme { CountryInfoRow(country, ) }
 }
