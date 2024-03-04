@@ -42,7 +42,5 @@ data class Country(
 ) : Parcelable {
     @IgnoredOnParcel
     val firstCapital = capital?.first() ?: "no capital defined"
-    @IgnoredOnParcel
-    val countryCode = altSpellings?.first() ?: "no country code defined"
 }
 

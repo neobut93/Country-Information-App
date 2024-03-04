@@ -9,7 +9,7 @@ import com.kodeco.android.countryinfo.ui.theme.MyApplicationTheme
 @Composable
 fun CountryErrorScreen() {
     val activity = (LocalContext.current as? Activity)
-    ErrorDialog(closeApp = {activity?.finish()})
+    ErrorDialog(closeApp = { activity?.finish() })
 }
 
 @Preview
