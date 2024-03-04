@@ -8,4 +8,8 @@
     <string name="country_name">Name: %1$s</string>
     <string name="capital_name">Capital: %1$s</string>
     <string name="loading_spinner_text">Loading...</string>
+    <string name="arrowback">arrowBack</string>
+    <string name="details_capital">Capital: %1$s</string>
+    <string name="population_details">Population: %1$s</string>
+    <string name="area_details">Area: %1$s</string>
 </resources>

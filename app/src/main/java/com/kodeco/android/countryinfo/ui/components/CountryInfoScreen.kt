@@ -2,6 +2,7 @@ package com.kodeco.android.countryinfo.ui.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.kodeco.android.countryinfo.network.CountriesUIState
 import com.kodeco.android.countryinfo.network.CountryUIState
@@ -9,13 +10,13 @@ import com.kodeco.android.countryinfo.network.CountryUIState
 @Composable
 fun CountryInfoScreen(
     uiState: CountriesUIState,
-    onNavigateToDetails: () -> Unit
+    navController: NavController
     ) {
     when (uiState) {
         is CountriesUIState.Loaded -> {
             CountryInfoList(
                 uiState.countries,
-                onNavigateToDetails)
+                navController)
         }
 
         CountriesUIState.Loading -> Loading()

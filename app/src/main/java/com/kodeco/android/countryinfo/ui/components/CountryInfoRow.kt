@@ -18,21 +18,21 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import com.kodeco.android.countryinfo.R
 import com.kodeco.android.countryinfo.network.Country
 import com.kodeco.android.countryinfo.network.CountryFlags
 import com.kodeco.android.countryinfo.network.CountryName
-import com.kodeco.android.countryinfo.ui.theme.MyApplicationTheme
 
 @Composable
 fun CountryInfoRow(
     country: Country,
-    //onItemClick: (Country) -> Unit,
-    onNavigateToDetails: () -> Unit
+    navController: NavController
 ) {
     val countryName = country.commonName
-    val capitalCapital = country.firstCapital
+    val capital = country.firstCapital
+    val population = country.population
+    val area = country.area.toInt()
+    val flag = country.flags.png
     Column(
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Center,
@@ -47,7 +47,7 @@ fun CountryInfoRow(
             .background(Color(0xFFE8EAF6))
             .clickable {
                 //onItemClick(country)
-                onNavigateToDetails()
+                navController.navigate("countryDetailsScreen?country=$countryName&capital=$capital&population=$population&area=$area&flag=$flag")
             }
     ) {
         Row(
@@ -68,7 +68,7 @@ fun CountryInfoRow(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = stringResource(R.string.capital_name, capitalCapital),
+                text = stringResource(R.string.capital_name, capital),
                 Modifier.padding(
                     bottom = 5.dp
                 )
