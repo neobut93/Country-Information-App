@@ -28,7 +28,6 @@ class MainActivity : ComponentActivity() {
                 ) {
                     MainScreen(uiState)
                     LaunchedEffect(Unit) {
-                        delay(3000)
                         uiState = try {
                             CountryUIState.Loaded(RetrofitClient.service.fetchCountries())
                         } catch (exception: Exception) {
