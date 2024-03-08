@@ -1,13 +1,53 @@
 package com.kodeco.android.countryinfo.ui.components
 
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.kodeco.android.countryinfo.network.Country
+import com.kodeco.android.countryinfo.network.CountryFlags
+import com.kodeco.android.countryinfo.network.CountryName
+import com.kodeco.android.countryinfo.ui.theme.MyApplicationTheme
 
-// TODO fill out CountryInfoList
 @Composable
-fun CountryInfoList() { }
+fun CountryInfoList(
+    countries: List<Country>,
+    navController: NavController
+) {
+    LazyColumn {
+        items(countries.size) {
+            countries.forEach { country ->
+                CountryInfoRow(
+                    country,
+                    navController
+                )
+            }
+        }
+    }
+}
 
-// TODO fill out the preview.
 @Preview
 @Composable
-fun CountryInfoListPreview() { }
+fun CountryInfoListPreview() {
+    val countryName = CountryName(
+        "France"
+    )
+    val countryFlags = CountryFlags(
+        "flag"
+    )
+    val country = Country(
+        countryName,
+        listOf("Paris"),
+        123L,
+        123.12,
+        countryFlags,
+        countryName.common,
+        "png"
+    )
+    val mockedListOfCountries = arrayListOf<Country>()
+    mockedListOfCountries.add(country)
+    MyApplicationTheme {
+        CountryInfoList(countries = mockedListOfCountries, rememberNavController())
+    }
+}

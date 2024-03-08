@@ -2,4 +2,14 @@
     <string name="app_name">Country Info</string>
     <string name="x_axis_slider_title">X Axis: %d%%</string>
     <string name="y_axis_slider_title">Y Axis: %d%%</string>
+    <string name="close_the_app_alert_button_text">Close the app</string>
+    <string name="error_alert_title">Error</string>
+    <string name="error_alert_message">Not able to get a data, please check internet connection and try again</string>
+    <string name="country_name">Name: %1$s</string>
+    <string name="capital_name">Capital: %1$s</string>
+    <string name="loading_spinner_text">Loading...</string>
+    <string name="arrowback">arrowBack</string>
+    <string name="details_capital">Capital: %1$s</string>
+    <string name="population_details">Population: %1$s</string>
+    <string name="area_details">Area: %1$s</string>
 </resources>

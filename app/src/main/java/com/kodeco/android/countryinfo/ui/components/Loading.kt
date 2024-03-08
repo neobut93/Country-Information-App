@@ -1,20 +1,47 @@
 package com.kodeco.android.countryinfo.ui.components
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.kodeco.android.countryinfo.R
+import com.kodeco.android.countryinfo.ui.theme.MyApplicationTheme
 
-// TODO fill out Loading. NOTE this is above-and-beyond the requirements
-//  for the homework assignment.
 @Composable
-fun Loading() { }
+fun Loading() {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        CircularProgressIndicator(
+            modifier = Modifier
+                .width(70.dp)
+                .padding(bottom = 40.dp),
+            color = MaterialTheme.colorScheme.secondary,
+            trackColor = MaterialTheme.colorScheme.surfaceVariant,
+            strokeWidth = 6.dp
+        )
+        Text(
+            text = stringResource(R.string.loading_spinner_text),
+            fontSize = 17.sp
+        )
+    }
+}
 
-// TODO fill out preview. NOTE this is above-and-beyond the requirements
-//  for the homework assignment.
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun LoadingPreview() { }
+fun LoadingPreview() {
+    MyApplicationTheme { CircularProgressIndicator() }
+}
